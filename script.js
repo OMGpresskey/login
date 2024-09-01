@@ -15,52 +15,57 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 // Handle login form submission
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
+if (document.getElementById('loginForm')) {
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-    const email = document.getElementById('loginEmail').value;
-    const password = document.getElementById('loginPassword').value;
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
 
-    try {
-        await signInWithEmailAndPassword(auth, email, password);
-        document.getElementById('loginMessage').textContent = 'Login successful!';
-        document.getElementById('loginMessage').style.color = 'green';
-    } catch (error) {
-        document.getElementById('loginMessage').textContent = 'Invalid email or password.';
-        document.getElementById('loginMessage').style.color = 'red';
-    }
-});
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            document.getElementById('loginMessage').textContent = 'Login successful!';
+            document.getElementById('loginMessage').style.color = 'green';
+        } catch (error) {
+            document.getElementById('loginMessage').textContent = 'Invalid email or password.';
+            document.getElementById('loginMessage').style.color = 'red';
+        }
+    });
+}
 
 // Handle signup form submission
-document.getElementById('signupForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
+if (document.getElementById('signupForm')) {
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-    const email = document.getElementById('signupEmail').value;
-    const password = document.getElementById('signupPassword').value;
+        const email = document.getElementById('signupEmail').value;
+        const password = document.getElementById('signupPassword').value;
 
-    try {
-        await createUserWithEmailAndPassword(auth, email, password);
-        document.getElementById('signupMessage').textContent = 'Sign up successful!';
-        document.getElementById('signupMessage').style.color = 'green';
-    } catch (error) {
-        document.getElementById('signupMessage').textContent = 'Error during sign up: ' + error.message;
-        document.getElementById('signupMessage').style.color = 'red';
-    }
-});
+        try {
+            await createUserWithEmailAndPassword(auth, email, password);
+            document.getElementById('signupMessage').textContent = 'Sign up successful!';
+            document.getElementById('signupMessage').style.color = 'green';
+        } catch (error) {
+            document.getElementById('signupMessage').textContent = 'Error during sign up: ' + error.message;
+            document.getElementById('signupMessage').style.color = 'red';
+        }
+    });
+}
 
 // Handle Google Sign In
 const provider = new GoogleAuthProvider();
 
-document.getElementById('googleSignInBtn').addEventListener('click', async () => {
-    try {
-        const result = await signInWithPopup(auth, provider);
-        // The signed-in user info
-        const user = result.user;
-        document.getElementById('loginMessage').textContent = 'Google Sign-In successful!';
-        document.getElementById('loginMessage').style.color = 'green';
-        console.log('User:', user);
-    } catch (error) {
-        document.getElementById('loginMessage').textContent = 'Google Sign-In failed: ' + error.message;
-        document.getElementById('loginMessage').style.color = 'red';
-    }
-});
+if (document.getElementById('googleSignInBtn')) {
+    document.getElementById('googleSignInBtn').addEventListener('click', async () => {
+        try {
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+            document.getElementById('loginMessage').textContent = 'Google Sign-In successful!';
+            document.getElementById('loginMessage').style.color = 'green';
+            console.log('User:', user);
+        } catch (error) {
+            document.getElementById('loginMessage').textContent = 'Google Sign-In failed: ' + error.message;
+            document.getElementById('loginMessage').style.color = 'red';
+        }
+    });
+}
