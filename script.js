@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.8.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.8.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB_hAZ7WXBrJF_rNLAzJpaohtyEtn6W09k",
@@ -14,36 +14,18 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// Handle login form submission
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const email = document.getElementById('loginEmail').value;
-    const password = document.getElementById('loginPassword').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
     try {
         await signInWithEmailAndPassword(auth, email, password);
-        document.getElementById('loginMessage').textContent = 'Login successful!';
-        document.getElementById('loginMessage').style.color = 'green';
+        document.getElementById('message').textContent = 'Login successful!';
+        document.getElementById('message').style.color = 'green';
     } catch (error) {
-        document.getElementById('loginMessage').textContent = 'Invalid email or password.';
-        document.getElementById('loginMessage').style.color = 'red';
-    }
-});
-
-// Handle signup form submission
-document.getElementById('signupForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const email = document.getElementById('signupEmail').value;
-    const password = document.getElementById('signupPassword').value;
-
-    try {
-        await createUserWithEmailAndPassword(auth, email, password);
-        document.getElementById('signupMessage').textContent = 'Sign up successful!';
-        document.getElementById('signupMessage').style.color = 'green';
-    } catch (error) {
-        document.getElementById('signupMessage').textContent = 'Error during sign up: ' + error.message;
-        document.getElementById('signupMessage').style.color = 'red';
+        document.getElementById('message').textContent = 'Invalid email or password.';
+        document.getElementById('message').style.color = 'red';
     }
 });
