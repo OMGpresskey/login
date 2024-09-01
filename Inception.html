@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INCEPTION - RPG Game</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            background-color: #000;
+            overflow-x: hidden;
+        }
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+        }
+        .hero::before, .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(70%) blur(2px);
+            z-index: -1;
+            animation: slide 5s infinite;
+        }
+        .hero::before {
+            background-image: url('https://tr.rbxcdn.com/ea35457dfcaa9c2df0a255294541920b/768/432/Image/Webp');
+        }
+        .hero::after {
+            background-image: url('https://tr.rbxcdn.com/f41a17e38498c4b97faf939b7cd0e229/768/432/Image/Webp');
+            animation: slide 5s infinite 5s;
+        }
+        @keyframes slide {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .hero-logo {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px; /* 로고 크기 조절 */
+            z-index: 2;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin: 0;
+            z-index: 2;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            color: #ccc;
+            z-index: 2;
+        }
+        .btn-start {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #ff6600;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            z-index: 2;
+        }
+        .btn-start:hover {
+            background-color: #e65c00;
+        }
+        .section {
+            padding: 60px 20px;
+        }
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .section p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .character-card {
+            background: #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px;
+            display: inline-block;
+            width: 300px;
+            text-align: center;
+        }
+        .character-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .community {
+            background: #111;
+            padding: 40px 20px;
+        }
+        .community h2 {
+            margin-bottom: 20px;
+        }
+        .footer {
+            background: #222;
+            color: #999;
+            text-align: center;
+            padding: 20px;
+        }
+        .requirements {
+            background: #333;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 20px auto;
+            max-width: 700px; /* 컨테이너 최대 폭 조정 */
+        }
+        .requirements h2 {
+            font-size: 1.8rem; /* 제목 크기 조정 */
+            border-bottom: 2px solid #ff6600;
+            padding-bottom: 5px;
+        }
+        .requirements ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .requirements ul li {
+            font-size: 1rem; /* 항목 텍스트 크기 조정 */
+            margin: 10px 0;
+        }
+        .requirements .min-requirements {
+            background: #444;
+        }
+        .requirements .rec-requirements {
+            background: #555;
+        }
+        .requirements .min-requirements h2 {
+            color: #ff6600;
+        }
+        .requirements .rec-requirements h2 {
+            color: #66ff66;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="https://i.postimg.cc/bJL1kfnb/001-3.png" alt="INCEPTION Logo" class="hero-logo">
+        <h1>INCEPTION</h1>
+        <p>현실을 넘어선 모험</p>
+        <button class="btn-start">게임 시작</button>
+    </section>
+
+    <!-- Game Overview -->
+    <section class="section">
+        <h2>게임 소개</h2>
+        <p>INCEPTION은 플레이어가 꿈과 현실의 경계를 넘나들며 모험을 떠나는 RPG 게임입니다. 독특한 스토리와 환상적인 세계를 경험해보세요.</p>
+        <p>"Inception RPG"는 적들을 물리치고, 개인 무기를 업그레이드하며 강력한 보스를 처치하는 흥미진진한 액션 RPG 게임입니다. 플레이어는 다양한 적들과 전투를 벌이며 경험치를 얻고, 이를 통해 캐릭터와 장비를 더욱 강력하게 만들 수 있습니다. 업그레이드된 무기를 가지고 최종 보스와의 전투를 준비하며, 다양한 게임 내 도전 과제를 완료하고 자신의 한계를 넘어서세요.</p>
+        <p>현재 게임은 알파 버전으로, 맵과 전체 콘텐츠가 개발 중에 있어 다소 제한적으로 느껴질 수 있습니다. 하지만 우리는 지속적으로 게임을 확장하고 개선하고 있으며, 여러분의 피드백은 매우 소중합니다. 전략적인 전투와 끝없는 성장의 조합으로 짜릿한 경험을 선사하는 "Inception RPG"에서 궁극의 전사가 되어 보세요!</p>
+    </section>
+
+    <!-- System Requirements -->
+    <section class="requirements min-requirements">
+        <h2>최소 사양</h2>
+        <ul>
+            <li>그래픽 카드: DirectX 10 이상의 기능 수준을 지원하는 내장 그래픽 카드. 최신 비디오 카드가 장착된 5년 미만의 컴퓨터 또는 비디오 카드가 내장된 3년 미만의 노트북 권장.</li>
+            <li>프로세서: 클럭 속도 1.6GHz 이상의 최신 프로세서.</li>
+            <li>RAM: 최소 1GB의 메모리.</li>
+            <li>저장 공간: Roblox 설치를 위한 최소 20MB의 여유 공간 필요.</li>
+        </ul>
+    </section>
+
+    <section class="requirements rec-requirements">
+        <h2>권장 사양</h2>
+        <ul>
+            <li>그래픽 카드: DirectX 11 이상 지원의 전용 비디오 카드. 최신 그래픽 카드가 장착된 3년 이내의 컴퓨터 또는 노트북 권장.</li>
+            <li>프로세서: 클럭 속도 3.0GHz 이상의 최신 프로세서.</li>
+            <li>RAM: 8GB 이상의 메모리.</li>
+            <li>저장 공간: Roblox 설치를 위한 40MB 이상의 여유 공간 필요.</li>
+        </ul>
+    </section>
+
+    <!-- Community -->
+    <section class="community">
+        <h2>커뮤니티</h2>
+        <p>팬 아트와 토론을 통해 INCEPTION 팬들과 소통하세요. 더 많은 정보를 원하시면 포럼을 방문해 주세요.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 INCEPTION Card Game. All rights reserved.</p>
+    </footer>
+</body>
+</html>

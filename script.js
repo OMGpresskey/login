@@ -29,6 +29,9 @@ if (document.getElementById('loginForm')) {
             if (user.emailVerified) {
                 document.getElementById('loginMessage').textContent = 'Login successful!';
                 document.getElementById('loginMessage').style.color = 'green';
+                
+                // Redirect to Inception.html
+                window.location.href = 'Inception.html';
             } else {
                 document.getElementById('loginMessage').textContent = 'Please verify your email address.';
                 document.getElementById('loginMessage').style.color = 'red';
@@ -74,7 +77,9 @@ if (document.getElementById('googleSignInBtn')) {
             const user = result.user;
             document.getElementById('loginMessage').textContent = 'Google Sign-In successful!';
             document.getElementById('loginMessage').style.color = 'green';
-            console.log('User:', user);
+            
+            // Redirect to Inception.html
+            window.location.href = 'Inception.html';
         } catch (error) {
             document.getElementById('loginMessage').textContent = 'Google Sign-In failed: ' + error.message;
             document.getElementById('loginMessage').style.color = 'red';
