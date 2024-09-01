@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.8.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.8.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB_hAZ7WXBrJF_rNLAzJpaohtyEtn6W09k",
@@ -23,9 +23,16 @@ if (document.getElementById('loginForm')) {
         const password = document.getElementById('loginPassword').value;
 
         try {
-            await signInWithEmailAndPassword(auth, email, password);
-            document.getElementById('loginMessage').textContent = 'Login successful!';
-            document.getElementById('loginMessage').style.color = 'green';
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+
+            if (user.emailVerified) {
+                document.getElementById('loginMessage').textContent = 'Login successful!';
+                document.getElementById('loginMessage').style.color = 'green';
+            } else {
+                document.getElementById('loginMessage').textContent = 'Please verify your email address.';
+                document.getElementById('loginMessage').style.color = 'red';
+            }
         } catch (error) {
             document.getElementById('loginMessage').textContent = 'Invalid email or password.';
             document.getElementById('loginMessage').style.color = 'red';
@@ -42,8 +49,13 @@ if (document.getElementById('signupForm')) {
         const password = document.getElementById('signupPassword').value;
 
         try {
-            await createUserWithEmailAndPassword(auth, email, password);
-            document.getElementById('signupMessage').textContent = 'Sign up successful!';
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+
+            // Send email verification
+            await sendEmailVerification(user);
+
+            document.getElementById('signupMessage').textContent = 'Sign up successful! Please check your email to verify your address.';
             document.getElementById('signupMessage').style.color = 'green';
         } catch (error) {
             document.getElementById('signupMessage').textContent = 'Error during sign up: ' + error.message;
@@ -69,3 +81,33 @@ if (document.getElementById('googleSignInBtn')) {
         }
     });
 }
+
+// Toggle between login and signup forms
+if (document.getElementById('showSignupForm')) {
+    document.getElementById('showSignupForm').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('signupSection').style.display = 'block';
+    });
+}
+
+if (document.getElementById('showLoginForm')) {
+    document.getElementById('showLoginForm').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('signupSection').style.display = 'none';
+        document.getElementById('loginForm').style.display = 'block';
+    });
+}
+
+// Redirect user to home page after email verification
+auth.onAuthStateChanged(user => {
+    if (user) {
+        if (user.emailVerified) {
+            // User is signed in and email is verified
+            console.log('User is signed in and email is verified.');
+        } else {
+            // User is signed in but email is not verified
+            console.log('User is signed in but email is not verified.');
+        }
+    }
+});
