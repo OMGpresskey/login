@@ -18,6 +18,11 @@ const auth = getAuth(app);
 onAuthStateChanged(auth, (user) => {
     if (!user) {
         window.location.href = 'index.html';
+    } else {
+        // 사용자 정보 표시
+        document.getElementById('userName').textContent = user.displayName || 'No Name';
+        document.getElementById('userEmail').textContent = user.email || 'No Email';
+        document.getElementById('profilePic').src = user.photoURL || 'https://via.placeholder.com/100';
     }
 });
 
@@ -25,7 +30,6 @@ onAuthStateChanged(auth, (user) => {
 const logoutBtn = document.getElementById('logoutBtn');
 logoutBtn.addEventListener('click', () => {
     signOut(auth).then(() => {
-        // 로그아웃 성공 시 로그인 페이지로 리디렉션
         window.location.href = 'index.html';
     }).catch((error) => {
         console.error('로그아웃 실패:', error);
